@@ -1,7 +1,7 @@
 import React from 'react'
 import {ILLogo, ILGetStarted} from './../../assets';
 import {StyleSheet, Text, View, ImageBackground} from 'react-native';
-import {Button} from '../../components'
+import {Button,Gap} from '../../components'
 
 const GetStarted = () => {
     return (
@@ -13,8 +13,8 @@ const GetStarted = () => {
           </Text>
         </View>
         <View>
-          <Button title="Get Started" />
-          <View style={{height:16}}/>
+          <Button title="Get Started" onPress={() => alert('hello')} />
+          <Gap height={16} />
           <Button title="Sign" type="secondary" />
         </View>
       </ImageBackground>
@@ -24,15 +24,15 @@ const GetStarted = () => {
 export default GetStarted 
 
 const styles = StyleSheet.create({
-    page : {
-        padding: 40,
-        flex: 1,
-        justifyContent: 'space-between',
-    },
-    title:{
-        fontSize:28,
-        fontWeight:"600",
-        color:'white',
-        marginTop:91
-    }
-})
+  page: {
+    padding: 40,
+    flex: 1,
+    justifyContent: 'space-between',
+  },
+  title: {
+    fontSize: 28,
+    color: 'white',
+    marginTop: 91,
+    fontFamily: 'Nunito-SemiBold',
+  },
+});

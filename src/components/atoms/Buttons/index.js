@@ -1,26 +1,26 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 
-const Button = ({type,title}) => {
+const Button = ({type,title,onPress}) => {
     return (
-      <View style={styles.container(type)}>
+      <TouchableOpacity style={styles.container(type)} onPress={onPress}>
         <Text style={styles.text(type)}>{title}</Text>
-      </View>
+      </TouchableOpacity>
     );
 }
 
 export default Button
 
 const styles = StyleSheet.create({
-    container :(type) => ({
-         backgroundColor: type ==='secondary'?'white':'#0bcad4',
-         borderRadius: 10,
-         paddingVertical: 10,
-    }),
-    text:(type) => ({
-        fontSize: 16,
-        fontWeight:'600',
-        textAlign : 'center',
-        color: type === 'secondary'? '#112340':'white'
-    })
-})
+  container: (type) => ({
+    backgroundColor: type === 'secondary' ? 'white' : '#0bcad4',
+    borderRadius: 10,
+    paddingVertical: 10,
+  }),
+  text: (type) => ({
+    fontSize: 18,
+    fontFamily: 'Nunito-SemiBold',
+    textAlign: 'center',
+    color: type === 'secondary' ? '#112340' : 'white',
+  }),
+});
