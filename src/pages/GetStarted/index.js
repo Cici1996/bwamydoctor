@@ -3,7 +3,7 @@ import {ILLogo, ILGetStarted} from './../../assets';
 import {StyleSheet, Text, View, ImageBackground} from 'react-native';
 import {Button,Gap} from '../../components'
 
-const GetStarted = () => {
+const GetStarted = ({navigation}) => {
     return (
       <ImageBackground source={ILGetStarted} style={styles.page}>
         <View>
@@ -13,9 +13,16 @@ const GetStarted = () => {
           </Text>
         </View>
         <View>
-          <Button title="Get Started" onPress={() => alert('hello')} />
+          <Button
+            title="Get Started"
+            onPress={() => navigation.navigate('Register')}
+          />
           <Gap height={16} />
-          <Button title="Sign" type="secondary" />
+          <Button
+            title="Sign"
+            type="secondary"
+            onPress={() => navigation.replace('Login')}
+          />
         </View>
       </ImageBackground>
     );
