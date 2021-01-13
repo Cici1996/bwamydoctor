@@ -2,6 +2,7 @@ import React from 'react'
 import {View, Text, StyleSheet} from 'react-native';
 import { ILLogo } from "../../assets";
 import { Input,Link,Button,Gap } from "../../components";
+import {colors} from '../../utils';
 
 const Login = () => {
     return (
@@ -32,7 +33,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontFamily: 'Nunito-SemiBold',
-    color:'#112340',
+    color:colors.text.primary,
     marginTop:40,
     marginBottom:40,
     maxWidth: 200,
