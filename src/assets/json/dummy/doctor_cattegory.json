@@ -1,0 +1,20 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "category": "umum"
+    },
+    {
+      "id": 2,
+      "category": "anak"
+    },
+    {
+      "id": 3,
+      "category": "pisikiater"
+    },
+    {
+      "id": 4,
+      "category": "obat"
+    }
+  ]
+}
