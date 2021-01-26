@@ -1,15 +1,19 @@
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
+import { IconChevronRight } from '../../../assets';
 import { colors, fonts } from '../../../utils';
 
-export default function ListDoctor({profile,name,desc}) {
+export default function ListDoctor({profile,name,desc,type}) {
   return (
     <View style={styles.container}>
       <Image source={profile} style={styles.avatar} />
-      <View>
+      <View style={styles.content}>
         <Text style={styles.name}>{name}</Text>
         <Text style={styles.desc}>{desc}</Text>
       </View>
+      {
+        type === 'next' && <IconChevronRight/> 
+      }
     </View>
   );
 }
@@ -21,12 +25,16 @@ const styles = StyleSheet.create({
     borderRadius: 46 / 2,
     marginRight: 12,
   },
+  content:{
+    flex : 1
+  },
   container: {
     flexDirection: 'row',
     padding: 16,
     borderBottomWidth:1,
     borderBottomColor:colors.border,
-    alignItems:'center'
+    alignItems:'center',
+    justifyContent:'space-between'
   },
   name:{
       fontSize:16,

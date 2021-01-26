@@ -10,7 +10,7 @@ import {
 import {colors, fonts} from '../../utils';
 import {JSONDoctorCategory} from '../../assets'
 
-export default function index() {
+export default function index({navigation}) {
   return (
     <View style={styles.page}>
       <View style={styles.content}>
@@ -28,7 +28,7 @@ export default function index() {
                 <Gap width={32} />
                 {
                   JSONDoctorCategory.data.map(data => {
-                    return <DoctorCategory key={data.id} category={data.category}/>
+                    return <DoctorCategory key={data.id} category={data.category} onPress={() => navigation.navigate('ChooseDoctor')}/>
                   })
                 }
                 <Gap width={22} />
