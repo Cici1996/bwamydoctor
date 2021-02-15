@@ -1,11 +1,11 @@
 import React from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import { IconChevronRight } from '../../../assets';
 import { colors, fonts } from '../../../utils';
 
-export default function ListDoctor({profile,name,desc,type}) {
+export default function ListDoctor({profile,name,desc,type,onPress}) {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
       <Image source={profile} style={styles.avatar} />
       <View style={styles.content}>
         <Text style={styles.name}>{name}</Text>
@@ -14,7 +14,7 @@ export default function ListDoctor({profile,name,desc,type}) {
       {
         type === 'next' && <IconChevronRight/> 
       }
-    </View>
+    </TouchableOpacity>
   );
 }
 

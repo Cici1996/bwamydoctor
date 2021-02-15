@@ -8,7 +8,7 @@ export default function ChooseDoctor({navigation}) {
     return (
         <View style={styles.page}>
             <Header title="Pilih Dokter Anak" type="dark" onPress={() => navigation.goBack()}/>
-            <ListDoctor type='next' profile={Doctor1} name="Siti Nurbaya" desc="Wanita"/>
+            <ListDoctor type='next' profile={Doctor1} name="Siti Nurbaya" desc="Wanita" onPress={() => navigation.navigate('Chatting')}/>
             <ListDoctor type='next' profile={Doctor1} name="Siti Nurbaya" desc="Wanita"/>
             <ListDoctor type='next' profile={Doctor1} name="Siti Nurbaya" desc="Wanita"/>
             <ListDoctor type='next' profile={Doctor1} name="Siti Nurbaya" desc="Wanita"/>
