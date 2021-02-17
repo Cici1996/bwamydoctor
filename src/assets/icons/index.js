@@ -10,6 +10,8 @@ import IconMapActive from './map_active.svg';
 import IconStart from './icon_start.svg';
 import IconChevronRight from './chevron_right.svg';
 import IconBackLight from './arro_left_light.svg';
+import IconSendLight from './send_light.svg';
+import IconSendGrey from './send_grey.svg';
 
 export {
   IconBackDark,
@@ -23,5 +25,7 @@ export {
   IconMapActive,
   IconStart,
   IconChevronRight,
-  IconBackLight
+  IconBackLight,
+  IconSendGrey,
+  IconSendLight,
 };
