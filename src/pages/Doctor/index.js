@@ -8,7 +8,7 @@ import {
   Gap,
 } from '../../components';
 import {colors, fonts} from '../../utils';
-import {JSONDoctorCategory} from '../../assets'
+import {Doctor2, JSONDoctorCategory} from '../../assets'
 
 export default function index({navigation}) {
   return (
@@ -17,7 +17,7 @@ export default function index({navigation}) {
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.wrapperSection}>
             <Gap height={30} />
-            <HomeProfile />
+            <HomeProfile onPress={() => navigation.navigate('UserProfile')} />
             <Text style={styles.welcomeText}>
               Mau Konsultasi dengan siapa hari ini?
             </Text>
@@ -26,20 +26,39 @@ export default function index({navigation}) {
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
               <View style={styles.doctorCategory}>
                 <Gap width={32} />
-                {
-                  JSONDoctorCategory.data.map(data => {
-                    return <DoctorCategory key={data.id} category={data.category} onPress={() => navigation.navigate('ChooseDoctor')}/>
-                  })
-                }
+                {JSONDoctorCategory.data.map((data) => {
+                  return (
+                    <DoctorCategory
+                      key={data.id}
+                      category={data.category}
+                      onPress={() => navigation.navigate('ChooseDoctor')}
+                    />
+                  );
+                })}
                 <Gap width={22} />
               </View>
             </ScrollView>
           </View>
           <View style={styles.wrapperSection}>
             <Text style={styles.title}>Top Rated Doctor</Text>
-            <RatedDoctor />
-            <RatedDoctor />
-            <RatedDoctor />
+            <RatedDoctor
+              name="Alexa"
+              desc="Doktor Umum"
+              avatar={Doctor2}
+              onPress={() => navigation.navigate('DoctorProfile')}
+            />
+            <RatedDoctor
+              name="Alexa"
+              desc="Doktor Umum"
+              avatar={Doctor2}
+              onPress={() => navigation.navigate('DoctorProfile')}
+            />
+            <RatedDoctor
+              name="Alexa"
+              desc="Doktor Umum"
+              avatar={Doctor2}
+              onPress={() => navigation.navigate('DoctorProfile')}
+            />
             <Text style={styles.title}>Good News</Text>
           </View>
           <GoodNewsItem />

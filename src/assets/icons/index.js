@@ -12,6 +12,10 @@ import IconChevronRight from './chevron_right.svg';
 import IconBackLight from './arro_left_light.svg';
 import IconSendLight from './send_light.svg';
 import IconSendGrey from './send_grey.svg';
+import IconAccount from './account.svg';
+import IconDocument from './document.svg';
+import IconStartBlue from './start.svg';
+import IconTranslate from './translate.svg';
 
 export {
   IconBackDark,
@@ -28,4 +32,8 @@ export {
   IconBackLight,
   IconSendGrey,
   IconSendLight,
+  IconAccount,
+  IconDocument,
+  IconStartBlue,
+  IconTranslate,
 };
