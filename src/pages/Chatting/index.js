@@ -3,10 +3,10 @@ import { StyleSheet, Text, View } from 'react-native'
 import {ChatItem, Header, InputChat} from '../../components'
 import { colors, fonts } from '../../utils'
 
-export default function Chatting() {
+export default function Chatting({navigation}) {
     return (
       <View style={styles.page}>
-        <Header type="dark-profile" title="Uzumaki Naruto" />
+        <Header type="dark-profile" title="Uzumaki Naruto" onPress={() => navigation.goBack()} />
         <View style={styles.content}>
           <Text style={styles.chatDate}>Senin, 21 Maret 2020</Text>
           <ChatItem isMe />
