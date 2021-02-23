@@ -1,24 +1,39 @@
-import React from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import React,{useState} from 'react';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Button, Gap, Header, Link} from '../../components';
-import {IconAddPhoto, ILNullPhoto} from '../../assets';
+import {IconAddPhoto, IconRemovePhoto, ILNullPhoto} from '../../assets';
 import {colors, fonts} from '../../utils';
+import ImagePicker from 'react-native-image-picker';
 
 const UploadPhoto = ({navigation}) => {
+  const [hasPhoto, sethasPhoto] = useState(false);
+  const [photo, setPhoto] = useState(ILNullPhoto);
+
+  const getImageFromGallery = () => {
+    ImagePicker.launchImageLibrary({},(response) => {
+      if(!response.didCancel || response.didCancel == null){
+        const sourceImage = {uri : response.uri};
+        setPhoto(sourceImage)
+        sethasPhoto(true)
+      }
+    });
+  }
+
   return (
     <View style={styles.page}>
       <Header title="Upload Photo" onPress={() => navigation.goBack()} />
       <View style={styles.content}>
         <View style={styles.profile}>
-          <View style={styles.avatarWrapper}>
-            <Image source={ILNullPhoto} style={styles.avatar} />
-            <IconAddPhoto style={styles.addPhoto} />
-          </View>
+          <TouchableOpacity style={styles.avatarWrapper} onPress={getImageFromGallery}>
+            <Image source={photo} style={styles.avatar} />
+            {hasPhoto && <IconRemovePhoto style={styles.addPhoto} />}
+            {!hasPhoto && <IconAddPhoto style={styles.addPhoto} />}            
+          </TouchableOpacity>
           <Text style={styles.name}>Shayna Melinda</Text>
           <Text style={styles.profession}>Product Designer</Text>
         </View>
         <View>
-          <Button title="Upload and Continue" />
+          <Button title="Upload and Continue" disable={!hasPhoto} />
           <Gap height={30} />
           <Link onPress={() => navigation.replace('MainApp')} title="Skip for this" align="center" size={16} />
         </View>
@@ -48,6 +63,7 @@ const styles = StyleSheet.create({
   avatar: {
     width: 110,
     height: 110,
+    borderRadius:110/2
   },
   avatarWrapper: {
     width: 130,

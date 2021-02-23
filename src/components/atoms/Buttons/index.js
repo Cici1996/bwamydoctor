@@ -1,27 +1,34 @@
-import React from 'react'
+import React from 'react';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import {colors,fonts} from '../../../utils';
+import {colors, fonts} from '../../../utils';
 import BtnIconSend from './BtnIconSend';
 import IconOnly from './iconOnly';
 
-const Button = ({type,title,onPress,icon,disable}) => {
+const Button = ({type, title, onPress, icon, disable}) => {
+  if (type === 'icon-only') {
+    return <IconOnly icon={icon} onPress={onPress} />;
+  }
 
-    if(type === "icon-only"){
-      return <IconOnly icon={icon} onPress={onPress} />;
-    }
+  if (type === 'btn-icon-send') {
+    return <BtnIconSend disable={disable} />;
+  }
 
-    if(type === "btn-icon-send"){
-      return <BtnIconSend disable={disable}/>;
-    }
-
+  if (disable) {
     return (
-      <TouchableOpacity style={styles.container(type)} onPress={onPress}>
-        <Text style={styles.text(type)}>{title}</Text>
-      </TouchableOpacity>
+      <View style={styles.disableBg}>
+        <Text style={styles.disableText}>{title}</Text>
+      </View>
     );
-}
+  }
 
-export default Button
+  return (
+    <TouchableOpacity style={styles.container(type)} onPress={onPress}>
+      <Text style={styles.text(type)}>{title}</Text>
+    </TouchableOpacity>
+  );
+};
+
+export default Button;
 
 const styles = StyleSheet.create({
   container: (type) => ({
@@ -41,4 +48,15 @@ const styles = StyleSheet.create({
         ? colors.button.secondary.text
         : colors.button.primary.text,
   }),
+  disableBg:{
+    backgroundColor:colors.button.disabled.background,
+    borderRadius: 10,
+    paddingVertical: 10,
+  },
+  disableText:{
+    fontSize: 18,
+    fontFamily: fonts.primary[600],
+    textAlign: 'center',
+    color:colors.button.disabled.text
+  }
 });
