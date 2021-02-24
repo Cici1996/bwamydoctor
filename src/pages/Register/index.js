@@ -27,6 +27,7 @@ const Register = ({navigation}) => {
           fullName: form.fullName,
           email: form.email,
           profession: form.profession,
+          uid:user.uid
         };
 
         Fire.database()
@@ -37,7 +38,7 @@ const Register = ({navigation}) => {
 
         //setForm('reset-value');
         //setLoading(false);
-        navigation.navigate("UploadPhoto");
+        navigation.navigate("UploadPhoto",dataUser);
       })
       .catch((error) => {
         // const errorCode = error.code;
