@@ -2,13 +2,13 @@ import React, {useState} from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Button, Gap, Header, Link} from '../../components';
 import {IconAddPhoto, IconRemovePhoto, ILNullPhoto} from '../../assets';
-import {colors, fonts} from '../../utils';
+import {colors, fonts, storeData} from '../../utils';
 import ImagePicker from 'react-native-image-picker';
 import {Fire} from '../../config';
 import {showMessage} from 'react-native-flash-message';
 
 const UploadPhoto = ({navigation, route}) => {
-  //const {fullName, profession, uid} = route.params;
+  const {fullName, profession, uid} = route.params;
   const [hasPhoto, sethasPhoto] = useState(false);
   const [photo, setPhoto] = useState(ILNullPhoto);
   const [photoForDb, setPhotoForDb] = useState('');
@@ -23,7 +23,6 @@ const UploadPhoto = ({navigation, route}) => {
           setPhotoForDb(photoForDB);
           setPhoto(sourceImage);
           sethasPhoto(true);
-          console.log(response)
         }else if(response.error != null){
           showMessage({
             message: response.error,
@@ -41,6 +40,11 @@ const UploadPhoto = ({navigation, route}) => {
       .ref('users/' + uid + '/')
       .update({photo: photoForDb});
 
+      const data = route.params;
+      data.photo = photoForDb;
+
+      storeData('user',data);
+
     navigation.replace('MainApp');
   };
 
@@ -56,8 +60,8 @@ const UploadPhoto = ({navigation, route}) => {
             {hasPhoto && <IconRemovePhoto style={styles.addPhoto} />}
             {!hasPhoto && <IconAddPhoto style={styles.addPhoto} />}
           </TouchableOpacity>
-          <Text style={styles.name}>fullName</Text>
-          <Text style={styles.profession}>profession</Text>
+          <Text style={styles.name}>{fullName}</Text>
+          <Text style={styles.profession}>{profession}</Text>
         </View>
         <View>
           <Button
