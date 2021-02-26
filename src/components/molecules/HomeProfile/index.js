@@ -13,7 +13,8 @@ const HomeProfile = ({onPress}) => {
   useEffect(() => {
     getData('user').then((res) => {
       const data = res;
-      data.photo = {uri : res.photo};
+      data.photo = res.photo == ""?ILNullPhoto:{uri : res.photo};
+      console.log(data)
 
       setProfile({
         fullName:res.fullName,

@@ -15,14 +15,13 @@ const Login = ({navigation}) => {
     Fire.auth()
       .signInWithEmailAndPassword(form.email, form.password)
       .then((res) => {
-        console.log(res);
-        setLoading(false);
         Fire.database()
           .ref(`users/${res.user.uid}/`)
           .once('value')
           .then((resDb) => {
             if (resDb.val()) {
               storeData('user', resDb.val());
+              setLoading(false);
               navigation.replace('MainApp')
             }
           });
