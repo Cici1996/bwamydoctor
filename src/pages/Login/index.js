@@ -8,7 +8,7 @@ import {Fire} from '../../config';
 import {colors, fonts, storeData, useForm} from '../../utils';
 
 const Login = ({navigation}) => {
-  const [form, setForm] = useForm({email: '', password: ''});
+  const [form, setForm] = useForm({email: 'adah@admin.bn', password: '87654321'});
   const [loading, setLoading] = useState(false);
   const login = () => {
     setLoading(true);

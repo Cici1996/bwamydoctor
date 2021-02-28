@@ -14,8 +14,6 @@ const HomeProfile = ({onPress}) => {
     getData('user').then((res) => {
       const data = res;
       data.photo = res.photo == ""?ILNullPhoto:{uri : res.photo};
-      console.log(data)
-
       setProfile({
         fullName:res.fullName,
         profession:res.profession,
