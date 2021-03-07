@@ -2,10 +2,9 @@ import React, {useState} from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Button, Gap, Header, Link} from '../../components';
 import {IconAddPhoto, IconRemovePhoto, ILNullPhoto} from '../../assets';
-import {colors, fonts, storeData} from '../../utils';
+import {colors, fonts, showError, storeData} from '../../utils';
 import ImagePicker from 'react-native-image-picker';
 import {Fire} from '../../config';
-import {showMessage} from 'react-native-flash-message';
 
 const UploadPhoto = ({navigation, route}) => {
   const {fullName, profession, uid} = route.params;
@@ -24,12 +23,7 @@ const UploadPhoto = ({navigation, route}) => {
           setPhoto(sourceImage);
           sethasPhoto(true);
         }else if(response.error != null){
-          showMessage({
-            message: response.error,
-            type: 'default',
-            backgroundColor: colors.error,
-            color: colors.white,
-          });
+          showError(response.error)
         }
       },
     );

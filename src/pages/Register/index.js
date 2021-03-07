@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
-import {Header, Input, Button, Gap, Loading} from '../../components';
+import { useDispatch } from 'react-redux';
+import {Header, Input, Button, Gap} from '../../components';
 import {Fire} from '../../config';
-import {colors, useForm} from '../../utils';
-import {showMessage} from 'react-native-flash-message';
+import {colors, setLoadingGlobal, showError, useForm} from '../../utils';
 import {storeData, getData} from '../../utils';
 
 const Register = ({navigation}) => {
@@ -14,10 +14,10 @@ const Register = ({navigation}) => {
     password: '',
   });
 
-  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
 
   const onContinue = () => {
-    setLoading(true);
+    setLoadingGlobal(dispatch,true);
     Fire.auth()
       .createUserWithEmailAndPassword(form.email, form.password)
       .then((userCredential) => {
@@ -37,7 +37,6 @@ const Register = ({navigation}) => {
         storeData('user', dataUser);
 
         //setForm('reset-value');
-        //setLoading(false);
         navigation.navigate("UploadPhoto",dataUser);
       })
       .catch((error) => {
@@ -45,19 +44,13 @@ const Register = ({navigation}) => {
         const errorMessage = error.message;
         console.log('register', errorMessage);
         setForm('reset-value');
-        setLoading(false);
-        showMessage({
-          message: errorMessage,
-          type: 'default',
-          backgroundColor: colors.error,
-          color: colors.white,
-        });
+        setLoadingGlobal(dispatch,false);
+        showError(errorMessage)
       });
   };
 
   return (
-    <>
-      <View style={styles.page}>
+    <View style={styles.page}>
         <Header title="Daftar Akun" onPress={() => navigation.goBack()} />
         <View style={styles.content}>
           <ScrollView showsVerticalScrollIndicator={false}>
@@ -90,8 +83,6 @@ const Register = ({navigation}) => {
           </ScrollView>
         </View>
       </View>
-      {loading && <Loading />}
-    </>
   );
 };
 

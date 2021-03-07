@@ -1,15 +1,16 @@
-import React, {useState} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import {showMessage} from 'react-native-flash-message';
-import {ScrollView} from 'react-native-gesture-handler';
-import {ILLogo} from '../../assets';
-import {Input, Link, Button, Gap, Loading} from '../../components';
-import {Fire} from '../../config';
-import {colors, fonts, storeData, useForm} from '../../utils';
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
+import { useDispatch } from 'react-redux';
+import { ILLogo } from '../../assets';
+import { Input, Link, Button, Gap } from '../../components';
+import { Fire } from '../../config';
+import { colors, fonts, showError, storeData, useForm, setLoadingGlobal } from '../../utils';
 
-const Login = ({navigation}) => {
-  const [form, setForm] = useForm({email: 'adah@admin.bn', password: '87654321'});
-  const [loading, setLoading] = useState(false);
+const Login = ({ navigation }) => {
+  const [form, setForm] = useForm({ email: 'adah@admin.bn', password: '87654321' });
+  const dispatch = useDispatch();
+
   const login = () => {
     setLoading(true);
     Fire.auth()
@@ -29,48 +30,45 @@ const Login = ({navigation}) => {
       .catch((err) => {
         console.log(err);
         setLoading(false);
-        showMessage({
-          message: err.message,
-          type: 'default',
-          backgroundColor: colors.error,
-          color: colors.white,
-        });
+        showError(err.message);
       });
   };
+
+  const setLoading = (value) => {
+    setLoadingGlobal(dispatch, value)
+  }
+
   return (
-    <>
-      <View style={styles.page}>
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <Gap height={40} />
-          <ILLogo />
-          <Text style={styles.title}>Masuk dan mulai berkonsultasi</Text>
-          <Input
-            label="Email Address"
-            value={form.email}
-            onChangeText={(value) => setForm('email', value)}
-          />
-          <Gap height={24} />
-          <Input
-            label="Password"
-            secureTextEntry
-            value={form.password}
-            onChangeText={(value) => setForm('password', value)}
-          />
-          <Gap height={10} />
-          <Link title="Forgot My Password" size={12} />
-          <Gap height={40} />
-          <Button title="Sign In" onPress={() => login()} />
-          <Gap height={30} />
-          <Link
-            title="Create New Account"
-            size={16}
-            align="center"
-            onPress={() => navigation.navigate('Register')}
-          />
-        </ScrollView>
-      </View>
-      {loading && <Loading />}
-    </>
+    <View style={styles.page}>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <Gap height={40} />
+        <ILLogo />
+        <Text style={styles.title}>Masuk dan mulai berkonsultasi</Text>
+        <Input
+          label="Email Address"
+          value={form.email}
+          onChangeText={(value) => setForm('email', value)}
+        />
+        <Gap height={24} />
+        <Input
+          label="Password"
+          secureTextEntry
+          value={form.password}
+          onChangeText={(value) => setForm('password', value)}
+        />
+        <Gap height={10} />
+        <Link title="Forgot My Password" size={12} />
+        <Gap height={40} />
+        <Button title="Sign In" onPress={() => login()} />
+        <Gap height={30} />
+        <Link
+          title="Create New Account"
+          size={16}
+          align="center"
+          onPress={() => navigation.navigate('Register')}
+        />
+      </ScrollView>
+    </View>
   );
 };
 
