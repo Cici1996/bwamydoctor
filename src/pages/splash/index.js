@@ -6,15 +6,15 @@ import { Fire } from '../../config';
 
 const Splash = ({navigation}) => {
   useEffect(() => {
-    setTimeout(() => {
-      Fire.auth().onAuthStateChanged((user) => {
-        if(user){
-          navigation.replace("MainApp");
-        }else{
-          navigation.replace("GetStarted");
-        }
-      })
-    }, 2000);
+    const subscriber = Fire.auth().onAuthStateChanged((user) => {
+      if(user){
+        navigation.replace("MainApp");
+      }else{
+        navigation.replace("GetStarted");
+      }
+    })
+
+    return subscriber;
   }, [])
   return (
     <View style={styles.page}>

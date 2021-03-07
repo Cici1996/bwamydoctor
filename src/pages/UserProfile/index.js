@@ -54,7 +54,7 @@ export default function UserProfile({navigation}) {
         type="next"
       />
       <ListItem icon="rate" name="Give Us Rate" desc="this desc" type="next" />
-      <ListItem icon="help" name="Sign Out" desc="Sign out from your account" type="next" onPress={signOut()} />
+      <ListItem icon="help" name="Sign Out" desc="Sign out from your account" type="next" onPress={() => signOut()} />
     </View>
   );
 }

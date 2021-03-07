@@ -59,7 +59,7 @@ const Login = ({navigation}) => {
           <Gap height={10} />
           <Link title="Forgot My Password" size={12} />
           <Gap height={40} />
-          <Button title="Sign In" onPress={login} />
+          <Button title="Sign In" onPress={() => login()} />
           <Gap height={30} />
           <Link
             title="Create New Account"
