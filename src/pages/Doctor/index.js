@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {
   DoctorCategory,
@@ -7,10 +7,39 @@ import {
   RatedDoctor,
   Gap,
 } from '../../components';
-import {colors, fonts} from '../../utils';
-import {Doctor2, JSONDoctorCategory} from '../../assets'
+import {colors, fonts, showError} from '../../utils';
+import {Doctor2} from '../../assets';
+import {Fire} from '../../config';
 
 export default function index({navigation}) {
+  const [news, setNews] = useState([])
+  const [categories, setCategories] = useState([])
+  useEffect(() => {
+    Fire.database()
+      .ref('categories_doctor/')
+      .once('value')
+      .then((res) => {
+        if(res.val()){
+          setCategories(res.val())
+        }
+      })
+      .catch((err) => {
+        showError(err.message);
+      });
+
+    Fire.database()
+      .ref('news/')
+      .once('value')
+      .then((res) => {
+        if(res.val()){
+          setNews(res.val())
+        }
+      })
+      .catch((err) => {
+        showError(err.message);
+      });
+  }, []);
+
   return (
     <View style={styles.page}>
       <View style={styles.content}>
@@ -26,7 +55,7 @@ export default function index({navigation}) {
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
               <View style={styles.doctorCategory}>
                 <Gap width={32} />
-                {JSONDoctorCategory.data.map((data) => {
+                {categories.map((data) => {
                   return (
                     <DoctorCategory
                       key={data.id}
@@ -61,9 +90,11 @@ export default function index({navigation}) {
             />
             <Text style={styles.title}>Good News</Text>
           </View>
-          <GoodNewsItem />
-          <GoodNewsItem />
-          <GoodNewsItem />
+          {news.map(item => {
+            return(
+              <GoodNewsItem key={item.id} title={item.title} date={item.date} image={item.image} />
+            )
+          })}
           <Gap height={6} />
         </ScrollView>
       </View>
